@@ -14,13 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.io.Serializable;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 
 public class Funciones{
     
@@ -69,39 +63,5 @@ public class Funciones{
 }
 
 }
-//Clase creada para la persistencia de datos
-class Base implements Serializable{
-    private ArrayList<Cliente> listclientes;
 
-    //constructor
-    public Base(ArrayList<Cliente> listclientes){
-        this.listclientes=listclientes;
-    }
 
-    //get
-    public ArrayList<Cliente> getListClientes(){return listclientes;}
-
-    //Agrega un cliente a la lista de clientes ya creada
-    public void addCliente(Cliente cliente){
-        listclientes.add(cliente);
-    }
-    
-}
-
-//Clase creada para la persistencia de datos
-class Archivo implements Serializable{
-    //Guarda a la clase Base en un archivo
-    public void guardar(Base base) throws FileNotFoundException, IOException{
-        ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream("baseVet.obj"));
-        salida.writeObject(base);
-        salida.close();
-    }
-    //Lee el archivo guardado y pasa su información a un objeto de tipo Base
-    public Base recuperar() throws IOException, ClassNotFoundException{
-        ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("baseVet.obj"));
-        Base base = (Base) entrada.readObject();
-        entrada.close();
-        return base;
-    }
-
-}
