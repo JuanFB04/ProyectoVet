@@ -54,7 +54,7 @@ public class Panel_Control {
         scanner.nextLine();  // Consumir la nueva línea
 
         // Crear una instancia de Mascota y Cliente
-        Mascota mascota = new Mascota(nombreMascota, razaMascota, tipoAnimalMascota, edadMascota, pesoMascota);
+        Mascota mascota = new Mascota(nombreMascota, tipoAnimalMascota, razaMascota,  edadMascota, pesoMascota);
         Cliente cliente = new Cliente(nombreCliente, telefonoCliente, correoCliente, mascota);
         
         System.out.println("Cliente agregado con éxito");
@@ -82,4 +82,39 @@ public class Panel_Control {
         return citaingresada;
     }
 
+    public int pedirMedicamento(Scanner scanner){
+        System.out.println("Seleccione el número de medicamento:");
+        System.out.println("1. Xilacina 2% (Perros)");
+        System.out.println("2. Ketamina 10% (Perros)");
+        System.out.println("3. Cerenia (Gatos)");
+        System.out.println("4. Metoclop (Gatos)");
+        int medicamento=0;
+        try {
+            medicamento = scanner.nextInt();
+            scanner.nextLine();
+        } catch (Exception e) {
+        
+        }
+        
+        return medicamento;
+    }
+
+    public Mascota pedirMascota(Scanner scanner, ArrayList<Cliente> listclientes){
+        System.out.println("Mascotas registradas:");
+        ArrayList<Mascota> listmascotas= new ArrayList<Mascota>();
+        for(Cliente c:listclientes){
+            Mascota m = c.getMascota();
+            System.out.println(m.getNombre());
+            listmascotas.add(m);
+        }
+        System.out.println("Ingrese el nombre de la mascota a la que desea aplicar medicamento:");
+        String nombreMascota = scanner.nextLine();
+        Mascota mascotabuscada = new Mascota("", "","", 0, 0);
+        for(Mascota mascota: listmascotas){
+            if(mascota.getNombre().equalsIgnoreCase(nombreMascota)){
+                mascotabuscada=mascota;
+            }
+        }
+        return mascotabuscada;
+    }
 }

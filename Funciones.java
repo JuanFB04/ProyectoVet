@@ -62,6 +62,30 @@ public class Funciones{
     });
 }
 
+public static void calcularDosis(Scanner scanner, Base base) {
+    Panel_Control panel = new Panel_Control();
+    Medicamentos med = new Medicamentos();
+   
+    Mascota mascota = panel.pedirMascota(scanner, base.getListClientes());
+    int medicamento = panel.pedirMedicamento(scanner);
+    
+    switch (medicamento) {
+        case 1:
+            med.calcularDosisXilacina(mascota, panel);
+            break;
+        case 2:
+            med.calcularDosisKetamina(mascota, panel);
+            break;
+        case 3:
+            med.calcularDosisCerenia(mascota, panel);
+            break;
+        case 4:
+            med.calcularDosisMetoclop(mascota, panel);
+            break;
+        default:
+            panel.mensaje("Opción no válida.");
+    }
+}
 }
 
 

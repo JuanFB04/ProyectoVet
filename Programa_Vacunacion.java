@@ -41,7 +41,7 @@ public class Programa_Vacunacion {
                     break;
 
                 case 3: //Se calcula y muestra dosis de medicamento para la mascota
-                    
+                    Funciones.calcularDosis(scanner, base);
                     break;
 
                 case 4://Se agenda una cita y demuestra la lista de citas en orden de proximidad, en la entrega final se agregará persistencia de datos para que se guarden las citas
