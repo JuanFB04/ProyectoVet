@@ -88,6 +88,14 @@ public class Panel_Control {
         System.out.println("2. Ketamina 10% (Perros)");
         System.out.println("3. Cerenia (Gatos)");
         System.out.println("4. Metoclop (Gatos)");
+        System.out.println("5. Agromycin® 20 L.A. (Cerdos)");
+        System.out.println("6. Amoxigentin® (Cerdos)");
+        System.out.println("7. Pen Dexa Strep®(Caballos)");
+        System.out.println("8. Enroflox® 10 (Caballos)");
+        System.out.println("9. Modivitasan® (Cuyos)");
+        System.out.println("10. Vitamino® B (Cuyos)");
+        System.out.println("11. Agrosona® (Cabras)");
+        System.out.println("12. Agrogenta®(Cabras)");
         int medicamento=0;
         try {
             medicamento = scanner.nextInt();

@@ -46,6 +46,86 @@ public class Medicamentos {
         }
     }
 
-    
-}
+    public void calcularDosisAgromicin(Mascota mascota, Panel_Control panel){
+        if (mascota.getTipoAnimal().equalsIgnoreCase("cerdo")){
+            double dosis = mascota.getPeso() / 10;
+            panel.mensaje("La dosis de Agromicin® 20 L.A. para un cerdo de " + mascota.getPeso() + " kg es de " + dosis + " ml.");
+        }  else {
+            panel.mensaje("Agromicin® 20 L.A. es únicamente para cerdos.");
 
+        }  
+    }
+    public void calcularDosisAmoxigentin(Mascota mascota, Panel_Control panel){
+        if (mascota.getTipoAnimal().equalsIgnoreCase("cerdo")){
+            double dosis = mascota.getPeso() / 10;
+            panel.mensaje("La dosis de Amoxigentin® para un cerdo de " + mascota.getPeso() + " kg es de " + dosis + " ml.");
+        }  else {
+            panel.mensaje("Amoxigentin® es únicamente para cerdos.");
+
+        }  
+    }
+
+    /**
+     * @param mascota
+     * @param panel
+     */
+    public void calcularDosisPenDexa(Mascota mascota, Panel_Control panel){
+        if (mascota.getTipoAnimal().equalsIgnoreCase("caballo")){
+            double dosis = mascota.getPeso() / 25;
+            panel.mensaje("La dosis de Pen Dexa Strep® para un caballo de " + mascota.getPeso() + " kg es de " + dosis + " ml.");
+        }  else {
+            panel.mensaje("Pen Dexa Strep® es únicamente para caballos.");
+
+        }  
+    }
+
+    public void calcularDosisEnroflox(Mascota mascota, Panel_Control panel){
+        if (mascota.getTipoAnimal().equalsIgnoreCase("caballo")){
+            double dosis = mascota.getPeso() / 40;
+            panel.mensaje("La dosis de Enroflox® 10 para un caballo de " + mascota.getPeso() + " kg es de " + dosis + " ml.");
+        }  else {
+            panel.mensaje("Enroflox® 10 es únicamente para caballos.");
+
+        }  
+    }
+
+    public void calcularDosisModivitasan(Mascota mascota, Panel_Control panel){
+        if (mascota.getTipoAnimal().equalsIgnoreCase("cuyo")){
+            double dosis = mascota.getPeso() * (0.05 / 2);
+            panel.mensaje("La dosis de Modivitasan® para un cuyo de " + mascota.getPeso() + " kg es de " + dosis + " ml.");
+        }  else {
+            panel.mensaje("Modivitasan® es únicamente para cuyos.");
+
+        }  
+    }
+
+    public void calcularDosisVitamino(Mascota mascota, Panel_Control panel){
+        if (mascota.getTipoAnimal().equalsIgnoreCase("cuyo")){
+            double dosis = mascota.getPeso() * (1 / mascota.getPeso());
+            panel.mensaje("La dosis de Vitamino® B para un cuyo de " + mascota.getPeso() + " kg es de " + dosis + " ml.");
+        }  else {
+            panel.mensaje("Vitamino® B es únicamente para cuyos.");
+
+        }  
+    }
+
+    public void calcularDosisAgrosona(Mascota mascota, Panel_Control panel){
+        if (mascota.getTipoAnimal().equalsIgnoreCase("cabra")){
+            double dosis = mascota.getPeso() /10;
+            panel.mensaje("La dosis de Agrosona® para una cabra de " + mascota.getPeso() + " kg es de " + dosis + " ml.");
+        }  else {
+            panel.mensaje("Agrosona® es únicamente para cabras.");
+
+        }  
+    }
+
+    public void calcularDosisAgrogenta(Mascota mascota, Panel_Control panel){
+        if (mascota.getTipoAnimal().equalsIgnoreCase("cabra")){
+            double dosis = mascota.getPeso() /27.5;
+            panel.mensaje("La dosis de Agrogenta® para una cabra de " + mascota.getPeso() + " kg es de " + dosis + " ml.");
+        }  else {
+            panel.mensaje("Agrogenta® es únicamente para cabras.");
+
+        }  
+    }
+}

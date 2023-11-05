@@ -81,6 +81,22 @@ public static void calcularDosis(Scanner scanner, Base base) {
             break;
         case 4:
             med.calcularDosisMetoclop(mascota, panel);
+        case 5: 
+            med.calcularDosisAgromicin(mascota,panel);
+        case 6: 
+            med.calcularDosisAmoxigentin(mascota,panel);
+        case 7: 
+            med.calcularDosisPenDexa(mascota,panel);
+        case 8: 
+            med.calcularDosisEnroflox(mascota,panel);
+        case 9: 
+            med.calcularDosisModivitasan(mascota,panel);
+        case 10: 
+            med.calcularDosisVitamino(mascota,panel);
+        case 11: 
+            med.calcularDosisAgrosona(mascota,panel);
+        case 12: 
+            med.calcularDosisAgrogenta(mascota,panel);
             break;
         default:
             panel.mensaje("Opción no válida.");
