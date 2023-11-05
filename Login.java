@@ -1,3 +1,14 @@
+/**
+ * Universidad del Valle de Guatemala
+ * Programación orientada a objetos
+ * @author Juan Ignacio Figueroa 23092
+ * @author María Alejandra Martinez Vásquez - 231426
+ * @author Marian Montejo- 23352
+ * @author Sandra Pineda-231137
+ * @fechaCreacion 04/11/23
+ * @fechaMod 04/11/23
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
