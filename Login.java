@@ -4,13 +4,16 @@ import java.util.Scanner;
 
 public class Login {
     public static void main(String[] args) {
+        // El código crea una instancia de la clase `Autenticacion` con ella llama al método `registrar` en el objeto `autenticacion` para
+        // registrar un usuario con el nombre de usuario 
         Autenticacion autenticacion = new Autenticacion();
         
-        // Agregar un usuario al iniciar la aplicación
+        // Agregar un usuario administrador al iniciar la aplicación
         autenticacion.registrar("administrador", "12345");
 
         Scanner scanner = new Scanner(System.in);
 
+        // El bucle while (true)` es un bucle infinito que continúa ejecutándose hasta que finaliza el programa
         while (true) {
             System.out.println("Bienvenido, seleccione una de las siguientes opciones: ");
             System.out.println("1. Iniciar sesión");
@@ -19,6 +22,7 @@ public class Login {
             
             int opcion = scanner.nextInt();
 
+            // Este bloque de código maneja la opción para iniciar sesión
             if (opcion == 1) {
                 System.out.print("Usuario: ");
                 String nombreUsuario = scanner.next();
@@ -30,6 +34,8 @@ public class Login {
                 } else {
                     System.out.println("Error: Inicio de sesión fallido.");
                 }
+
+            // Este bloque de código maneja la opción para registrar usuario
             } else if (opcion == 2) {
                 System.out.print("Para crear una cuenta, ingrese los siguientes datos: ");
                 System.out.print("Usuario: ");
@@ -75,11 +81,15 @@ class Autenticacion {
         this.usuariosRegistrados = new ArrayList<>();
     }
 
+    // El método `registrar` en la clase `Autenticacion` se utiliza para registrar un nuevo usuario.
+    // Toma dos parámetros: `nombreUsuario` (nombre de usuario) y `contrasena` (contraseña).
     public void registrar(String nombreUsuario, String contrasena) {
         Usuarios nuevoUsuario = new Usuarios(nombreUsuario, contrasena);
         usuariosRegistrados.add(nuevoUsuario);
     }
 
+    // El método `autenticar` en la clase `Autenticacion` se utiliza para autenticar a un usuario. Toma
+    // dos parámetros: `nombreUsuario` (nombre de usuario) y `contrasena` (contraseña).
     public boolean autenticar(String nombreUsuario, String contrasena) {
         for (Usuarios usuario : usuariosRegistrados) {
             if (usuario.obtenerUsuario().equals(nombreUsuario) && usuario.obtenerContrasena().equals(contrasena)) {
