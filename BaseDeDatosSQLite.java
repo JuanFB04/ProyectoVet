@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -75,28 +77,26 @@ public class BaseDeDatosSQLite {
         return resultSet;
     }
 
-    public Mascota obtenerMascotaPorId(int id) {
-        Mascota mascota = null;
+    public ArrayList<Cliente> getListClientes() {
+        ArrayList<Cliente> clientes = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            String selectMascotaSQL = "SELECT * FROM mascotas WHERE id = " + id + ";";
-            ResultSet resultSet = statement.executeQuery(selectMascotaSQL);
-    
-            if (resultSet.next()) {
-                int mascotaId = resultSet.getInt("id");
+            String selectClientesSQL = "SELECT * FROM clientes;";
+            ResultSet resultSet = statement.executeQuery(selectClientesSQL);
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
                 String nombre = resultSet.getString("nombre");
-                String tipoAnimal = resultSet.getString("tipoAnimal");
-                double peso = resultSet.getDouble("peso");
-    
-                // Crear una instancia de la mascota con los datos obtenidos de la base de datos
-                mascota = new Mascota(mascotaId, nombre, tipoAnimal, peso);
+                String telefono = resultSet.getString("telefono");
+                String correo = resultSet.getString("correo");
+                Cliente cliente = new Cliente(nombre, telefono, correo, null);
+                clientes.add(cliente);
             }
         } catch (SQLException e) {
-            System.out.println("Error al obtener la mascota por ID: " + e.getMessage());
+            System.out.println("Error al obtener los clientes: " + e.getMessage());
         }
-        return mascota;
+        return clientes;
     }
-    
 
     public void cerrarConexion() {
         try {

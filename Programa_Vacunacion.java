@@ -32,26 +32,30 @@ public class Programa_Vacunacion {
                      ResultSet clientes = baseDeDatos.obtenerTodosLosClientes();
                     break;
 
-                case 3: //Se calcula y muestra dosis de medicamento para la mascota
-                    int idMascota = panel.obtenerIdMascota(scanner); // Pide al usuario seleccionar una mascota (debe obtenerse de la base de datos)
-                    Mascota mascota = baseDeDatos.obtenerMascotaPorId(idMascota); // Debes implementar un método en tu clase BaseDeDatosSQLite para obtener la mascota por su ID
-                    int idMedicamento = panel.pedirMedicamento(scanner); // Pide al usuario seleccionar un medicamento (debe obtenerse de la base de datos)
+                    case 3: // Se calcula y muestra dosis de medicamento para la mascota
+                    Mascota mascota = panel.pedirMascota(scanner, baseDeDatos.getListClientes());
+                    int idMedicamento = panel.pedirMedicamento(scanner);
+                
                     Medicamentos medicamentos = new Medicamentos();
                 
-                    // Aquí llamamos al método correspondiente según el medicamento seleccionado
-                    if (idMedicamento == 1) {
-                        medicamentos.calcularDosisXilacina(mascota, panel);
-                    } else if (idMedicamento == 2) {
-                        medicamentos.calcularDosisKetamina(mascota, panel);
-                    } else if (idMedicamento == 3) {
-                        medicamentos.calcularDosisCerenia(mascota, panel);
-                    } else if (idMedicamento == 4) {
-                        medicamentos.calcularDosisMetoclop(mascota, panel);
-                    } else {
-                        panel.mensaje("Medicamento no válido.");
+                    switch (idMedicamento) {
+                        case 1:
+                            medicamentos.calcularDosisXilacina(mascota, panel);
+                            break;
+                        case 2:
+                            medicamentos.calcularDosisKetamina(mascota, panel);
+                            break;
+                        case 3:
+                            medicamentos.calcularDosisCerenia(mascota, panel);
+                            break;
+                        case 4:
+                            medicamentos.calcularDosisMetoclop(mascota, panel);
+                            break;
+                        default:
+                            panel.mensaje("Medicamento no válido.");
                     }
                     break;
-                    
+                
                 case 4://Se agenda una cita y demuestra la lista de citas en orden de proximidad, en la entrega final se agregará persistencia de datos para que se guarden las citas
                     Funciones.agendarCita(scanner);
                     break;
