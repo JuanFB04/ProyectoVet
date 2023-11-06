@@ -48,6 +48,7 @@ public class Programa_Vacunacion {
 
             // Este bloque de código maneja la opción para registrar usuario
             } else if (opcion == 2) {
+                
                 System.out.print("Para crear una cuenta, ingrese los siguientes datos: ");
                 System.out.print("Usuario: ");
                 String nombreUsuario = scanner.next();
@@ -67,14 +68,17 @@ public class Programa_Vacunacion {
             switch (funcion) {
                 case 1: //Se piden los datos del cliente y se guardan en una base de datos
                     Cliente cliente = panel.crearClienteDesdeConsola(scanner);
+                    baseDeDatos.conexion();
                     baseDeDatos.insertarCliente(cliente.getNombre(), cliente.getTelefono(), cliente.getCorreo());
                     break;
 
                 case 2: //Se abre la base de datos para desplegar todos los clientes registrados
+                    baseDeDatos.conexion();
                      ResultSet clientes = baseDeDatos.obtenerTodosLosClientes();
                     break;
 
                     case 3: // Se calcula y muestra dosis de medicamento para la mascota
+                    baseDeDatos.conexion();
                     Mascota mascota = panel.pedirMascota(scanner, baseDeDatos.getListClientes());
                     int idMedicamento = panel.pedirMedicamento(scanner);
                 

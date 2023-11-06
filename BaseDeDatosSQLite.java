@@ -16,14 +16,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BaseDeDatosSQLite {
-    private Connection connection;
+    private Connection connection = null;
 
-    public BaseDeDatosSQLite() {
+    public void conexion() {
         // Constructor: Establecer la conexión a la base de datos en este punto
-        String url = "jdbc:sqlite:mi_basededatos.db";
+        String url = "jdbc:sqlite:./bases/veterinario.db";
         try {
+            Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(url);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
         }
     }
@@ -64,6 +65,16 @@ public class BaseDeDatosSQLite {
         }
     }
 
+    public void insertarCliente(String nombre, String telefono, String correo) {
+        try {
+            Statement statement = connection.createStatement();
+            String insertClienteSQL = "INSERT INTO clientes (nombre, telefono, correo) VALUES ('" + nombre + "', '" + telefono + "', " + correo + ");";
+            statement.execute(insertClienteSQL);
+        } catch (SQLException e) {
+            System.out.println("Error al insertar una mascota: " + e.getMessage());
+        }
+    }
+
     public void insertarMascota(String nombre, String tipoAnimal, double peso) {
         try {
             Statement statement = connection.createStatement();
@@ -73,6 +84,7 @@ public class BaseDeDatosSQLite {
             System.out.println("Error al insertar una mascota: " + e.getMessage());
         }
     }
+
 
     /**
      * @return
@@ -118,9 +130,6 @@ public class BaseDeDatosSQLite {
         } catch (SQLException e) {
             System.out.println("Error al cerrar la conexión a la base de datos: " + e.getMessage());
         }
-    }
-
-    public void insertarCliente(String nombre, String telefono, String correo) {
     }
 
     public ResultSet obtenerTodosLosClientes() {

@@ -23,7 +23,9 @@ public class Mascota implements Serializable{
         this.edad = edad;
         this.peso = peso;
         
-        
+    }
+
+    public Mascota(String nombre2, String tipoAnimal2, double peso2) {
     }
 
     // Getters y setters
@@ -61,8 +63,6 @@ public class Mascota implements Serializable{
     public void setPeso(double peso) {
         this.peso = peso;
     }
-
-   
 
    
 }
