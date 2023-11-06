@@ -6,7 +6,7 @@
  * @author Marian Montejo- 23352
  * @author Sandra Pineda-231137
  * @fechaCreacion 05/10/23
- * @fechaMod 09/10/12
+ * @fechaMod 05/23/23
  */
 import java.util.Scanner;
 import java.util.List;

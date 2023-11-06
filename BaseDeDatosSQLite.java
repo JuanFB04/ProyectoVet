@@ -1,8 +1,17 @@
+/**
+ * Universidad del Valle de Guatemala
+ * Programación orientada a objetos
+ * @author Juan Ignacio Figueroa 23092
+ * @author María Alejandra Martinez Vásquez - 231426
+ * @author Marian Montejo- 23352
+ * @author Sandra Pineda-231137
+ * @fechaCreacion 02/11/23
+ * @fechaMod 05/11/23
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -65,6 +74,9 @@ public class BaseDeDatosSQLite {
         }
     }
 
+    /**
+     * @return
+     */
     public ResultSet obtenerTodasLasMascotas() {
         ResultSet resultSet = null;
         try {
@@ -77,6 +89,9 @@ public class BaseDeDatosSQLite {
         return resultSet;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<Cliente> getListClientes() {
         ArrayList<Cliente> clientes = new ArrayList<>();
         try {
@@ -85,7 +100,6 @@ public class BaseDeDatosSQLite {
             ResultSet resultSet = statement.executeQuery(selectClientesSQL);
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
                 String nombre = resultSet.getString("nombre");
                 String telefono = resultSet.getString("telefono");
                 String correo = resultSet.getString("correo");

@@ -6,7 +6,7 @@
  * @author Marian Montejo- 23352
  * @author Sandra Pineda-231137
  * @fechaCreacion 09/10/23
- * @fechaMod 09/10/12
+ * @fechaMod 05/11/23
  */
 public class Medicamentos {
 
