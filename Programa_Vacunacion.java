@@ -8,17 +8,16 @@
  * @fechaCreacion 05/10/23
  * @fechaMod 05/11/23
  */
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.IOException;
-import java.sql.ResultSet;
 
 public class Programa_Vacunacion {
-    public static void main(String[] args)throws IOException, ClassNotFoundException {
+    public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         Panel_Control panel = new Panel_Control();
-        BaseDeDatosSQLite baseDeDatos = new BaseDeDatosSQLite(); // Crear una instancia de la clase
-        // El código crea una instancia de la clase `Autenticacion` con ella llama al método `registrar` en el objeto `autenticacion` para
-        // registrar un usuario con el nombre de usuario 
+        BaseDeDatosSQLite baseDeDatos = new BaseDeDatosSQLite(); 
+        baseDeDatos.conexion();
+        baseDeDatos.crearTablas();
         Autenticacion autenticacion = new Autenticacion();
         
         // Agregar un usuario administrador al iniciar la aplicación
@@ -67,19 +66,21 @@ public class Programa_Vacunacion {
             funcion = panel.elegirFuncion(scanner);
             switch (funcion) {
                 case 1: //Se piden los datos del cliente y se guardan en una base de datos
-                    Cliente cliente = panel.crearClienteDesdeConsola(scanner);
-                    baseDeDatos.conexion();
-                    baseDeDatos.insertarCliente(cliente.getNombre(), cliente.getTelefono(), cliente.getCorreo());
+                    panel.crearClienteDesdeConsola(scanner);
+                    baseDeDatos.cargarClientes();
                     break;
-
                 case 2: //Se abre la base de datos para desplegar todos los clientes registrados
                     baseDeDatos.conexion();
-                     ResultSet clientes = baseDeDatos.obtenerTodosLosClientes();
+                    baseDeDatos.cargarClientes();
+                    ArrayList<Cliente> clientes = baseDeDatos.getClientes();
+                    System.out.println("--Clientes--");
+                    panel.listarClientes(scanner, clientes);
                     break;
 
-                    case 3: // Se calcula y muestra dosis de medicamento para la mascota
+                case 3: // Se calcula y muestra dosis de medicamento para la mascota
                     baseDeDatos.conexion();
-                    Mascota mascota = panel.pedirMascota(scanner, baseDeDatos.getListClientes());
+                    baseDeDatos.cargarClientes();
+                    Mascota mascota = panel.pedirMascota(scanner, baseDeDatos.getClientes());
                     int idMedicamento = panel.pedirMedicamento(scanner);
                 
                     Medicamentos medicamentos = new Medicamentos();

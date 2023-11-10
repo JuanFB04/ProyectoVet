@@ -10,6 +10,7 @@
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.ResultSet;
@@ -32,7 +33,6 @@ public class BaseDeDatosSQLite {
     public void crearTablas() {
         crearTablaClientes();
         crearTablaMascotas();
-        crearTablaMedicamentos();
     }
 
     public void crearTablaClientes() {
@@ -48,37 +48,28 @@ public class BaseDeDatosSQLite {
     public void crearTablaMascotas() {
         try {
             Statement statement = connection.createStatement();
-            String createMascotasTableSQL = "CREATE TABLE IF NOT EXISTS mascotas (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, tipoAnimal TEXT, peso REAL);";
+            String createMascotasTableSQL = "CREATE TABLE IF NOT EXISTS mascotas (user TEXT PRIMARY KEY NOT NULL, nombre TEXT, tipoAnimal TEXT, raza TEXT NOT NULL, edad TEXT NOT NULL, peso REAL NOT NULL, FOREIGN KEY (user) REFERENCES clientes(correo) );";
             statement.execute(createMascotasTableSQL);
         } catch (SQLException e) {
             System.out.println("Error al crear la tabla de mascotas: " + e.getMessage());
         }
     }
 
-    public void crearTablaMedicamentos() {
-        try {
-            Statement statement = connection.createStatement();
-            String createMedicamentosTableSQL = "CREATE TABLE IF NOT EXISTS medicamentos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT);";
-            statement.execute(createMedicamentosTableSQL);
-        } catch (SQLException e) {
-            System.out.println("Error al crear la tabla de medicamentos: " + e.getMessage());
-        }
-    }
 
     public void insertarCliente(String nombre, String telefono, String correo) {
         try {
             Statement statement = connection.createStatement();
-            String insertClienteSQL = "INSERT INTO clientes (nombre, telefono, correo) VALUES ('" + nombre + "', '" + telefono + "', " + correo + ");";
+            String insertClienteSQL = "INSERT INTO clientes (nombre, telefono, correo) VALUES ('" + nombre + "', '" + telefono + "', '" + correo + "');";
             statement.execute(insertClienteSQL);
         } catch (SQLException e) {
             System.out.println("Error al insertar una mascota: " + e.getMessage());
         }
     }
 
-    public void insertarMascota(String nombre, String tipoAnimal, double peso) {
+    public void insertarMascota(String user, String nombre, String tipoAnimal, String raza, int edad, double peso) {
         try {
             Statement statement = connection.createStatement();
-            String insertMascotaSQL = "INSERT INTO mascotas (nombre, tipoAnimal, peso) VALUES ('" + nombre + "', '" + tipoAnimal + "', " + peso + ");";
+            String insertMascotaSQL = "INSERT INTO mascotas (user, nombre, tipoAnimal, raza, edad, peso) VALUES ('"+user+"','"+nombre + "', '" + tipoAnimal + "', '"+raza+"', '"+edad+"', '"+ peso + "');";
             statement.execute(insertMascotaSQL);
         } catch (SQLException e) {
             System.out.println("Error al insertar una mascota: " + e.getMessage());
@@ -104,8 +95,9 @@ public class BaseDeDatosSQLite {
     /**
      * @return
      */
-    public ArrayList<Cliente> getListClientes() {
-        ArrayList<Cliente> clientes = new ArrayList<>();
+    private ArrayList<Cliente> clientes = new ArrayList<>();
+    private ArrayList<Mascota> mascotas = new ArrayList<>();
+    public void cargarClientes() {
         try {
             Statement statement = connection.createStatement();
             String selectClientesSQL = "SELECT * FROM clientes;";
@@ -118,10 +110,25 @@ public class BaseDeDatosSQLite {
                 Cliente cliente = new Cliente(nombre, telefono, correo, null);
                 clientes.add(cliente);
             }
+            for (Cliente cliente  : clientes) {
+                String selectMascotas = "select * from mascotas where user = ?";
+                PreparedStatement stmt = connection.prepareStatement(selectMascotas);
+                stmt.setString(1,cliente.getCorreo());
+                ResultSet rest  = stmt.executeQuery();
+                while (rest.next()) {
+                    String nombre = rest.getString(2);
+                    String tipoA = rest.getString(3);
+                    String raza = rest.getString(4);
+                    int edad = rest.getInt(5);
+                    double peso = rest.getDouble(6);
+                    Mascota mascota = new Mascota(nombre, tipoA, raza, edad, peso);
+                    cliente.setMascota(mascota);
+                    mascotas.add(mascota);
+                }
+            }
         } catch (SQLException e) {
             System.out.println("Error al obtener los clientes: " + e.getMessage());
         }
-        return clientes;
     }
 
     public void cerrarConexion() {
@@ -134,6 +141,13 @@ public class BaseDeDatosSQLite {
 
     public ResultSet obtenerTodosLosClientes() {
         return null;
+    }
+
+    public ArrayList<Cliente> getClientes(){
+        return clientes;
+    }
+    public ArrayList<Mascota> getMascotas(){
+        return mascotas;
     }
 }
 

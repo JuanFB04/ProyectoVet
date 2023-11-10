@@ -9,9 +9,12 @@
  * @fechaMod 09/10/12
  */
 import java.util.Scanner;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Panel_Control {
+    BaseDeDatosSQLite base = new BaseDeDatosSQLite();
     //Despliega el mensaje ingresado
     public void mensaje(String mensaje){
         System.out.println(mensaje);
@@ -26,7 +29,8 @@ public class Panel_Control {
     }
 
     //Toma los datos del cliente y mascota y regresa el objeto de cliente
-    public Cliente crearClienteDesdeConsola(Scanner scanner) {
+    public void crearClienteDesdeConsola(Scanner scanner) {
+        base.conexion();
         System.out.println("Ingrese el nombre del cliente:");
         String nombreCliente = scanner.nextLine();
 
@@ -56,16 +60,17 @@ public class Panel_Control {
         // Crear una instancia de Mascota y Cliente
         Mascota mascota = new Mascota(nombreMascota, tipoAnimalMascota, razaMascota,  edadMascota, pesoMascota);
         Cliente cliente = new Cliente(nombreCliente, telefonoCliente, correoCliente, mascota);
+        base.crearTablas();
+        base.insertarCliente(nombreCliente, telefonoCliente, correoCliente);
+        base.insertarMascota(cliente.getCorreo(),nombreMascota, tipoAnimalMascota, razaMascota, edadMascota, pesoMascota);
         
         System.out.println("Cliente agregado con éxito");
         System.out.print("Presione cualquier tecla para regresar");
         scanner.nextLine();
-        return cliente;
     }
 
     //Lista todos los atributos de cada cliente y su mascota
     public void listarClientes(Scanner scanner, ArrayList<Cliente> listclientes){
-        System.out.println("Clientes registrados:");
         for(Cliente c:listclientes){
             Mascota m = c.getMascota();
             System.out.println("\nCliente: "+c.getNombre()+" | Tel: "+ c.getTelefono()+" | Correo: "+ c.getCorreo());
@@ -88,14 +93,6 @@ public class Panel_Control {
         System.out.println("2. Ketamina 10% (Perros)");
         System.out.println("3. Cerenia (Gatos)");
         System.out.println("4. Metoclop (Gatos)");
-        System.out.println("5. Agromycin® 20 L.A. (Cerdos)");
-        System.out.println("6. Amoxigentin® (Cerdos)");
-        System.out.println("7. Pen Dexa Strep®(Caballos)");
-        System.out.println("8. Enroflox® 10 (Caballos)");
-        System.out.println("9. Modivitasan® (Cuyos)");
-        System.out.println("10. Vitamino® B (Cuyos)");
-        System.out.println("11. Agrosona® (Cabras)");
-        System.out.println("12. Agrogenta®(Cabras)");
         int medicamento=0;
         try {
             medicamento = scanner.nextInt();
@@ -107,10 +104,10 @@ public class Panel_Control {
         return medicamento;
     }
 
-    public Mascota pedirMascota(Scanner scanner, ArrayList<Cliente> listclientes){
+    public Mascota pedirMascota(Scanner scanner, List<Cliente> list){
         System.out.println("Mascotas registradas:");
         ArrayList<Mascota> listmascotas= new ArrayList<Mascota>();
-        for(Cliente c:listclientes){
+        for(Cliente c:list){
             Mascota m = c.getMascota();
             System.out.println(m.getNombre());
             listmascotas.add(m);
@@ -124,5 +121,16 @@ public class Panel_Control {
             }
         }
         return mascotabuscada;
+    }
+
+    public int obtenerIdMascota(Scanner scanner) {
+        return 0;
+    }
+
+    public void mostrarMascotas(ResultSet mascotas) {
+    }
+
+    public int obtenerOpcionMascota(Scanner scanner) {
+        return 0;
     }
 }

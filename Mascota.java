@@ -25,9 +25,6 @@ public class Mascota implements Serializable{
         
     }
 
-    public Mascota(String nombre2, String tipoAnimal2, double peso2) {
-    }
-
     // Getters y setters
     public String getNombre() {
         return nombre;
