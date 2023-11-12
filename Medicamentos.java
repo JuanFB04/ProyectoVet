@@ -6,10 +6,14 @@
  * @author Marian Montejo- 23352
  * @author Sandra Pineda-231137
  * @fechaCreacion 09/10/23
- * @fechaMod 05/11/23
+ * @fechaMod 12/11/23
  */
 public class Medicamentos {
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisXilacina(Mascota mascota, Panel_Control panel) {
         if (mascota.getTipoAnimal().equalsIgnoreCase("perro")) {
             double dosis = mascota.getPeso() * 2; // Calcular la dosis en mg
@@ -19,6 +23,10 @@ public class Medicamentos {
         }
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisKetamina(Mascota mascota, Panel_Control panel) {
         if (mascota.getTipoAnimal().equalsIgnoreCase("perro")) {
             double dosis = (mascota.getPeso())/10; // Calcular la dosis en ml
@@ -28,6 +36,10 @@ public class Medicamentos {
         }
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisCerenia(Mascota mascota, Panel_Control panel) {
         if (mascota.getTipoAnimal().equalsIgnoreCase("gato")) {
             double dosis = (mascota.getPeso())/ 10; // Calcular la dosis en ml
@@ -37,6 +49,10 @@ public class Medicamentos {
         }
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisMetoclop(Mascota mascota, Panel_Control panel) {
         if (mascota.getTipoAnimal().equalsIgnoreCase("gato")) {
             double dosis = mascota.getPeso() * 2; // Calcular la dosis en ml
@@ -46,6 +62,10 @@ public class Medicamentos {
         }
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisAgromicin(Mascota mascota, Panel_Control panel){
         if (mascota.getTipoAnimal().equalsIgnoreCase("cerdo")){
             double dosis = mascota.getPeso() / 10;
@@ -55,6 +75,11 @@ public class Medicamentos {
 
         }  
     }
+
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisAmoxigentin(Mascota mascota, Panel_Control panel){
         if (mascota.getTipoAnimal().equalsIgnoreCase("cerdo")){
             double dosis = mascota.getPeso() / 10;
@@ -79,6 +104,10 @@ public class Medicamentos {
         }  
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisEnroflox(Mascota mascota, Panel_Control panel){
         if (mascota.getTipoAnimal().equalsIgnoreCase("caballo")){
             double dosis = mascota.getPeso() / 40;
@@ -89,6 +118,10 @@ public class Medicamentos {
         }  
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisModivitasan(Mascota mascota, Panel_Control panel){
         if (mascota.getTipoAnimal().equalsIgnoreCase("cuyo")){
             double dosis = mascota.getPeso() * (0.05 / 2);
@@ -99,6 +132,10 @@ public class Medicamentos {
         }  
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisVitamino(Mascota mascota, Panel_Control panel){
         if (mascota.getTipoAnimal().equalsIgnoreCase("cuyo")){
             double dosis = mascota.getPeso() * (1 / mascota.getPeso());
@@ -109,6 +146,10 @@ public class Medicamentos {
         }  
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisAgrosona(Mascota mascota, Panel_Control panel){
         if (mascota.getTipoAnimal().equalsIgnoreCase("cabra")){
             double dosis = mascota.getPeso() /10;
@@ -119,6 +160,10 @@ public class Medicamentos {
         }  
     }
 
+    /**
+     * @param mascota
+     * @param panel
+     */
     public void calcularDosisAgrogenta(Mascota mascota, Panel_Control panel){
         if (mascota.getTipoAnimal().equalsIgnoreCase("cabra")){
             double dosis = mascota.getPeso() /27.5;

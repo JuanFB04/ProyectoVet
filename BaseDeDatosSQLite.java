@@ -6,7 +6,7 @@
  * @author Marian Montejo- 23352
  * @author Sandra Pineda-231137
  * @fechaCreacion 02/11/23
- * @fechaMod 05/11/23
+ * @fechaMod 12/11/23
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -98,6 +98,8 @@ public class BaseDeDatosSQLite {
     private ArrayList<Cliente> clientes = new ArrayList<>();
     private ArrayList<Mascota> mascotas = new ArrayList<>();
     public void cargarClientes() {
+        clientes.clear();
+        mascotas.clear();
         try {
             Statement statement = connection.createStatement();
             String selectClientesSQL = "SELECT * FROM clientes;";
@@ -143,9 +145,16 @@ public class BaseDeDatosSQLite {
         return null;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<Cliente> getClientes(){
         return clientes;
     }
+
+    /**
+     * @return
+     */
     public ArrayList<Mascota> getMascotas(){
         return mascotas;
     }

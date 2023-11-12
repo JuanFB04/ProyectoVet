@@ -6,7 +6,7 @@
  * @author Marian Montejo- 23352
  * @author Sandra Pineda-231137
  * @fechaCreacion 05/10/23
- * @fechaMod 05/23/23
+ * @fechaMod 12/11/23
  */
 import java.util.Scanner;
 import java.util.List;
@@ -62,11 +62,11 @@ public class Funciones{
     });
 }
 
-public static void calcularDosis(Scanner scanner, Base base) {
+public static void calcularDosis(Scanner scanner, ArrayList<Cliente> listclientes) {
     Panel_Control panel = new Panel_Control();
     Medicamentos med = new Medicamentos();
    
-    Mascota mascota = panel.pedirMascota(scanner, base.getListClientes());
+    Mascota mascota = panel.pedirMascota(scanner, listclientes);
     int medicamento = panel.pedirMedicamento(scanner);
     
     switch (medicamento) {
@@ -81,25 +81,34 @@ public static void calcularDosis(Scanner scanner, Base base) {
             break;
         case 4:
             med.calcularDosisMetoclop(mascota, panel);
+            break;
         case 5: 
             med.calcularDosisAgromicin(mascota,panel);
+            break;
         case 6: 
             med.calcularDosisAmoxigentin(mascota,panel);
+            break;
         case 7: 
             med.calcularDosisPenDexa(mascota,panel);
+            break;
         case 8: 
             med.calcularDosisEnroflox(mascota,panel);
+            break;
         case 9: 
             med.calcularDosisModivitasan(mascota,panel);
+            break;
         case 10: 
             med.calcularDosisVitamino(mascota,panel);
+            break;
         case 11: 
             med.calcularDosisAgrosona(mascota,panel);
+            break;
         case 12: 
             med.calcularDosisAgrogenta(mascota,panel);
             break;
         default:
             panel.mensaje("Opción no válida.");
+            break;
     }
 }
 }

@@ -6,7 +6,7 @@
  * @author Marian Montejo- 23352
  * @author Sandra Pineda-231137
  * @fechaCreacion 05/10/23
- * @fechaMod 09/10/12
+ * @fechaMod 12/11/12
  */
 import java.util.Scanner;
 import java.sql.ResultSet;
@@ -75,9 +75,9 @@ public class Panel_Control {
             Mascota m = c.getMascota();
             System.out.println("\nCliente: "+c.getNombre()+" | Tel: "+ c.getTelefono()+" | Correo: "+ c.getCorreo());
             System.out.println("Mascota: "+m.getNombre()+" | Tipo animal: "+m.getTipoAnimal()+" | Raza: "+m.getRaza()+" | Edad: "+m.getEdad()+" | Peso: "+m.getPeso()+" kg");
-            System.out.print("\nPresione cualquier tecla para regresar");
-            scanner.nextLine();
         }
+        System.out.print("\nPresione cualquier tecla para regresar");
+        scanner.nextLine();
     }
 
     //Pide la fecha para cita en cierto formato
@@ -89,10 +89,18 @@ public class Panel_Control {
 
     public int pedirMedicamento(Scanner scanner){
         System.out.println("Seleccione el número de medicamento:");
-        System.out.println("1. Xilacina 2% (Perros)");
-        System.out.println("2. Ketamina 10% (Perros)");
-        System.out.println("3. Cerenia (Gatos)");
-        System.out.println("4. Metoclop (Gatos)");
+        System.out.println("1.  Xilacina 2% (Perro)");
+        System.out.println("2.  Ketamina 10% (Perro)");
+        System.out.println("3.  Cerenia (Gato)");
+        System.out.println("4.  Metoclop (Gato)");
+        System.out.println("5.  Agromicin (Cerdo)");
+        System.out.println("6.  Amoxigentin (Cerdo)");
+        System.out.println("7.  PenDexa (Caballo)");
+        System.out.println("8.  Enroflox (Caballo)");
+        System.out.println("9.  Modivitasan (Cuyo)");
+        System.out.println("10. Vitamino (Cuyo)");
+        System.out.println("11. Agrosona (Cabra)");
+        System.out.println("12. Agrogenta (Cabra)");
         int medicamento=0;
         try {
             medicamento = scanner.nextInt();

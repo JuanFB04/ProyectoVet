@@ -6,7 +6,7 @@
  * @author Marian Montejo- 23352
  * @author Sandra Pineda-231137
  * @fechaCreacion 05/10/23
- * @fechaMod 05/11/23
+ * @fechaMod 12/11/23
  */
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -25,39 +25,39 @@ public class Programa_Vacunacion {
 
         // El bucle while (true)` es un bucle infinito que continúa ejecutándose hasta que finaliza el programa
         while (true) {
-            System.out.println("Bienvenido, seleccione una de las siguientes opciones: ");
-            System.out.println("1. Iniciar sesión");
-            System.out.println("2. Registrarse");
+            panel.mensaje("Bienvenido, seleccione una de las siguientes opciones: ");
+            panel.mensaje("1. Iniciar sesión");
+            panel.mensaje("2. Registrarse");
             
             int opcion = scanner.nextInt();
 
             // Este bloque de código maneja la opción para iniciar sesión
             if (opcion == 1) {
-                System.out.print("Usuario: ");
+                panel.mensaje("Usuario: ");
                 String nombreUsuario = scanner.next();
-                System.out.print("Contraseña: ");
+                panel.mensaje("Contraseña: ");
                 String contrasena = scanner.next();
 
                 if (autenticacion.autenticar(nombreUsuario, contrasena)) {
-                    System.out.println("Inicio de sesión exitoso.");
+                    panel.mensaje("Inicio de sesión exitoso.");
                     break;
                 } else {
-                    System.out.println("Error: Inicio de sesión fallido.");
+                    panel.mensaje("Error: Inicio de sesión fallido.");
                 }
 
             // Este bloque de código maneja la opción para registrar usuario
             } else if (opcion == 2) {
                 
-                System.out.print("Para crear una cuenta, ingrese los siguientes datos: ");
-                System.out.print("Usuario: ");
+                panel.mensaje("Para crear una cuenta, ingrese los siguientes datos: ");
+                panel.mensaje("Usuario: ");
                 String nombreUsuario = scanner.next();
-                System.out.print("Contraseña: ");
+                panel.mensaje("Contraseña: ");
                 String contrasena = scanner.next();
 
                 autenticacion.registrar(nombreUsuario, contrasena);
-                System.out.println("Usuario registrado con éxito.");
+                panel.mensaje("Usuario registrado con éxito.");
             }else {
-                System.out.println("Opción no válida. Inténtelo de nuevo.");
+                panel.mensaje("Opción no válida. Inténtelo de nuevo.");
             }
         }
 
@@ -73,37 +73,17 @@ public class Programa_Vacunacion {
                     baseDeDatos.conexion();
                     baseDeDatos.cargarClientes();
                     ArrayList<Cliente> clientes = baseDeDatos.getClientes();
-                    System.out.println("--Clientes--");
+                    panel.mensaje("--Clientes--");
                     panel.listarClientes(scanner, clientes);
                     break;
 
                 case 3: // Se calcula y muestra dosis de medicamento para la mascota
                     baseDeDatos.conexion();
                     baseDeDatos.cargarClientes();
-                    Mascota mascota = panel.pedirMascota(scanner, baseDeDatos.getClientes());
-                    int idMedicamento = panel.pedirMedicamento(scanner);
-                
-                    Medicamentos medicamentos = new Medicamentos();
-                
-                    switch (idMedicamento) {
-                        case 1:
-                            medicamentos.calcularDosisXilacina(mascota, panel);
-                            break;
-                        case 2:
-                            medicamentos.calcularDosisKetamina(mascota, panel);
-                            break;
-                        case 3:
-                            medicamentos.calcularDosisCerenia(mascota, panel);
-                            break;
-                        case 4:
-                            medicamentos.calcularDosisMetoclop(mascota, panel);
-                            break;
-                        default:
-                            panel.mensaje("Medicamento no válido.");
-                    }
+                    Funciones.calcularDosis(scanner, baseDeDatos.getClientes());
                     break;
                 
-                case 4://Se agenda una cita y demuestra la lista de citas en orden de proximidad, en la entrega final se agregará persistencia de datos para que se guarden las citas
+                case 4://Se agenda una cita y demuestra la lista de citas en orden de proximidad
                     Funciones.agendarCita(scanner);
                     break;
                 
