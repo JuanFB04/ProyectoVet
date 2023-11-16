@@ -30,13 +30,14 @@ public class Programa_Vacunacion {
             panel.mensaje("2. Registrarse");
             
             int opcion = scanner.nextInt();
+            scanner.nextLine();
 
             // Este bloque de código maneja la opción para iniciar sesión
             if (opcion == 1) {
                 panel.mensaje("Usuario: ");
-                String nombreUsuario = scanner.next();
+                String nombreUsuario = scanner.nextLine();
                 panel.mensaje("Contraseña: ");
-                String contrasena = scanner.next();
+                String contrasena = scanner.nextLine();
 
                 if (autenticacion.autenticar(nombreUsuario, contrasena)) {
                     panel.mensaje("Inicio de sesión exitoso.");

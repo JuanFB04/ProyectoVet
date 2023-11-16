@@ -21,10 +21,16 @@ class Usuarios {
         this.contrasena = contrasena;
     }
 
+    /**
+     * @return
+     */
     public String obtenerUsuario() {
         return usuario;
     }
 
+    /**
+     * @return
+     */
     public String obtenerContrasena() {
         return contrasena;
     }
@@ -39,6 +45,10 @@ class Autenticacion {
 
     // El método `registrar` en la clase `Autenticacion` se utiliza para registrar un nuevo usuario.
     // Toma dos parámetros: `nombreUsuario` (nombre de usuario) y `contrasena` (contraseña).
+    /**
+     * @param nombreUsuario
+     * @param contrasena
+     */
     public void registrar(String nombreUsuario, String contrasena) {
         Usuarios nuevoUsuario = new Usuarios(nombreUsuario, contrasena);
         usuariosRegistrados.add(nuevoUsuario);
@@ -46,6 +56,11 @@ class Autenticacion {
 
     // El método `autenticar` en la clase `Autenticacion` se utiliza para autenticar a un usuario. Toma
     // dos parámetros: `nombreUsuario` (nombre de usuario) y `contrasena` (contraseña).
+    /**
+     * @param nombreUsuario
+     * @param contrasena
+     * @return
+     */
     public boolean autenticar(String nombreUsuario, String contrasena) {
         for (Usuarios usuario : usuariosRegistrados) {
             if (usuario.obtenerUsuario().equals(nombreUsuario) && usuario.obtenerContrasena().equals(contrasena)) {

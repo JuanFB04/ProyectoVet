@@ -56,6 +56,11 @@ public class BaseDeDatosSQLite {
     }
 
 
+    /**
+     * @param nombre
+     * @param telefono
+     * @param correo
+     */
     public void insertarCliente(String nombre, String telefono, String correo) {
         try {
             Statement statement = connection.createStatement();
@@ -66,6 +71,14 @@ public class BaseDeDatosSQLite {
         }
     }
 
+    /**
+     * @param user
+     * @param nombre
+     * @param tipoAnimal
+     * @param raza
+     * @param edad
+     * @param peso
+     */
     public void insertarMascota(String user, String nombre, String tipoAnimal, String raza, int edad, double peso) {
         try {
             Statement statement = connection.createStatement();
@@ -141,6 +154,9 @@ public class BaseDeDatosSQLite {
         }
     }
 
+    /**
+     * @return
+     */
     public ResultSet obtenerTodosLosClientes() {
         return null;
     }

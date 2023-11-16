@@ -26,37 +26,67 @@ public class Mascota implements Serializable{
     }
 
     // Getters y setters
+    /**
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
+    /**
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * @return
+     */
     public String getTipoAnimal() {
         return tipoAnimal;
     }
+    /**
+     * @param tipoAnimal
+     */
     public void setTipoAnimal(String tipoAnimal) {
         this.tipoAnimal = tipoAnimal;
     }
 
+    /**
+     * @return
+     */
     public String getRaza() {
         return raza;
     }
+    /**
+     * @param raza
+     */
     public void setRaza(String raza) {
         this.raza = raza;
     }
 
+    /**
+     * @return
+     */
     public int getEdad(){
         return edad;
     }
+    /**
+     * @param edad
+     */
     public void setEdad(int edad){
         this.edad = edad;
     }
 
+    /**
+     * @return
+     */
     public double getPeso() {
         return peso;
     }
+    /**
+     * @param peso
+     */
     public void setPeso(double peso) {
         this.peso = peso;
     }

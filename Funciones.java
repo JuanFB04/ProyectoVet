@@ -19,6 +19,9 @@ import java.time.temporal.ChronoUnit;
 public class Funciones{
     
     //El método'agendarCita' pide que se ingrese una fecha para luego registrar una cita en esa fecha, además ordenas las citas en orden de proximidad
+    /**
+     * @param scanner
+     */
     public static void agendarCita(Scanner scanner) {
     // Estas líneas de código inicializan una lista llamada `Citas` y se crea el objeto `Panel_Control` llamado `panel` para interactuar con el usuario.
     Panel_Control panel = new Panel_Control();
@@ -51,6 +54,9 @@ public class Funciones{
 }
 
     //El método 'ordenarproximas' es un método privado que toma como parámetro la lista.
+    /**
+     * @param citas
+     */
     private static void ordenarproximas(List<LocalDate> citas) {
     LocalDate proximafecha = LocalDate.now();
 
@@ -62,6 +68,10 @@ public class Funciones{
     });
 }
 
+/**
+ * @param scanner
+ * @param listclientes
+ */
 public static void calcularDosis(Scanner scanner, ArrayList<Cliente> listclientes) {
     Panel_Control panel = new Panel_Control();
     Medicamentos med = new Medicamentos();

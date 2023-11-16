@@ -23,30 +23,54 @@ public class Cliente implements Serializable {
     }
 
     // Getters y setters
+    /**
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
+    /**
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * @return
+     */
     public String getTelefono() {
         return telefono;
     }
+    /**
+     * @param telefono
+     */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
+    /**
+     * @return
+     */
     public String getCorreo() {
         return correo;
     }
+    /**
+     * @param correo
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
+    /**
+     * @return
+     */
     public Mascota getMascota() {
         return mascota;
     }
+    /**
+     * @param mascota
+     */
     public void setMascota(Mascota mascota) {
         this.mascota = mascota;
     }

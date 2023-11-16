@@ -16,11 +16,18 @@ import java.util.List;
 public class Panel_Control {
     BaseDeDatosSQLite base = new BaseDeDatosSQLite();
     //Despliega el mensaje ingresado
+    /**
+     * @param mensaje
+     */
     public void mensaje(String mensaje){
         System.out.println(mensaje);
     }
 
     //Despliega las opciones de funciones del programa y regresa la elegida
+    /**
+     * @param scanner
+     * @return
+     */
     public int elegirFuncion(Scanner scanner){
         System.out.println("\nElija una opción:\n| 1. Ingresar datos clientes\n| 2. Mostrar clientes\n| 3. Calcular dosis medicamento\n| 4. Agendar cita\n| 5. Salir");
         int funcion = scanner.nextInt();
@@ -29,6 +36,9 @@ public class Panel_Control {
     }
 
     //Toma los datos del cliente y mascota y regresa el objeto de cliente
+    /**
+     * @param scanner
+     */
     public void crearClienteDesdeConsola(Scanner scanner) {
         base.conexion();
         System.out.println("Ingrese el nombre del cliente:");
@@ -70,6 +80,10 @@ public class Panel_Control {
     }
 
     //Lista todos los atributos de cada cliente y su mascota
+    /**
+     * @param scanner
+     * @param listclientes
+     */
     public void listarClientes(Scanner scanner, ArrayList<Cliente> listclientes){
         for(Cliente c:listclientes){
             Mascota m = c.getMascota();
@@ -81,12 +95,20 @@ public class Panel_Control {
     }
 
     //Pide la fecha para cita en cierto formato
+    /**
+     * @param scanner
+     * @return
+     */
     public String pedirFechaCita(Scanner scanner){
         System.out.print("Ingrese la fecha en la que desea calendarizar la cita: (YYYY-MM-DD) o escriba 'salir' para terminar: ");
         String citaingresada = scanner.nextLine();
         return citaingresada;
     }
 
+    /**
+     * @param scanner
+     * @return
+     */
     public int pedirMedicamento(Scanner scanner){
         System.out.println("Seleccione el número de medicamento:");
         System.out.println("1.  Xilacina 2% (Perro)");
@@ -112,6 +134,11 @@ public class Panel_Control {
         return medicamento;
     }
 
+    /**
+     * @param scanner
+     * @param list
+     * @return
+     */
     public Mascota pedirMascota(Scanner scanner, List<Cliente> list){
         System.out.println("Mascotas registradas:");
         ArrayList<Mascota> listmascotas= new ArrayList<Mascota>();
@@ -131,13 +158,24 @@ public class Panel_Control {
         return mascotabuscada;
     }
 
+    /**
+     * @param scanner
+     * @return
+     */
     public int obtenerIdMascota(Scanner scanner) {
         return 0;
     }
 
+    /**
+     * @param mascotas
+     */
     public void mostrarMascotas(ResultSet mascotas) {
     }
 
+    /**
+     * @param scanner
+     * @return
+     */
     public int obtenerOpcionMascota(Scanner scanner) {
         return 0;
     }
