@@ -8,70 +8,189 @@
  * @fechaCreacion 05/10/23
  * @fechaMod 12/11/23
  */
-import java.util.Scanner;
-import java.util.List;
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 
+public class Funciones {
 
-public class Funciones{
-    
-    //El método'agendarCita' pide que se ingrese una fecha para luego registrar una cita en esa fecha, además ordenas las citas en orden de proximidad
-    /**
-     * @param scanner
-     */
+    static class Cita implements Comparable<Cita> {
+        private Date fecha;
+        private String nombreMascota;
+
+        public Cita(Date fecha, String nombreMascota) {
+            this.fecha = fecha;
+            this.nombreMascota = nombreMascota;
+        }
+
+        public Date getFecha() {
+            return fecha;
+        }
+
+        public String getNombreMascota() {
+            return nombreMascota;
+        }
+
+        @Override
+        public int compareTo(Cita otraCita) {
+            return this.fecha.compareTo(otraCita.getFecha());
+        }
+
+        @Override
+        public String toString() {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            return dateFormat.format(fecha) + "," + nombreMascota;
+        }
+    }
+
+    static class Agenda {
+        private List<Cita> citas;
+
+        public Agenda() {
+            this.citas = new ArrayList<>();
+        }
+
+        public List<Cita> getCitas() {
+            return citas;
+        }
+
+        public void agendarCita(Date fecha, String nombreMascota) {
+            Cita nuevaCita = new Cita(fecha, nombreMascota);
+            citas.add(nuevaCita);
+            Collections.sort(citas);
+        }
+
+        public void mostrarCitas() {
+            for (Cita cita : citas) {
+                System.out.println("Fecha: " + cita.getFecha() + ", Mascota: " + cita.getNombreMascota());
+            }
+        }
+
+        public void guardarCitasEnArchivo(String filePath) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (Cita cita : citas) {
+                    writer.write(cita.toString());
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void cargarCitasDesdeArchivo(String filePath) {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                System.out.println("El archivo no existe. Creando uno nuevo.");
+                return;
+            }
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    if (parts.length == 2) {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                        Date fecha = dateFormat.parse(parts[0]);
+                        String nombreMascota = parts[1];
+                        agendarCita(fecha, nombreMascota);
+                    }
+                }
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public static void agendarCita(Scanner scanner) {
-    // Estas líneas de código inicializan una lista llamada `Citas` y se crea el objeto `Panel_Control` llamado `panel` para interactuar con el usuario.
-    Panel_Control panel = new Panel_Control();
-    List<LocalDate> Citas = new ArrayList<>();
-
-    // El bucle `while (true)` es un bucle infinito que continúa ejecutándose hasta que se encuentra una declaración de interrupción.
-    while (true) {
-        String citaingresada= panel.pedirFechaCita(scanner);
-        if (citaingresada.equalsIgnoreCase("salir")) {
-            break;
+            try (Scanner agendas = new Scanner(System.in)) {
+                Agenda agenda = new Agenda();
+   
+             
+                agenda.cargarCitasDesdeArchivo("citas.csv");
+   
+                
+                while (true) {
+                    System.out.println("¿Qué desea hacer?");
+                    System.out.println("1. Agregar una cita");
+                    System.out.println("2. Eliminar una cita");
+                    System.out.println("3. Mostrar citas");
+                    System.out.println("4. Salir");
+   
+                    int opcion = agendas.nextInt();
+                    agendas.nextLine(); 
+   
+                    switch (opcion) {
+                        case 1:
+                            while (true) {
+                                System.out.println("Ingrese la fecha de la cita (dd-MM-yyyy HH:mm):");
+                                String fechaStr = agendas.nextLine();
+   
+                                System.out.println("Ingrese el nombre de la mascota:");
+                                String nombreMascota = agendas.nextLine();
+   
+                                try {
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                                    Date fecha = dateFormat.parse(fechaStr);
+   
+                                    agenda.agendarCita(fecha, nombreMascota);
+   
+                                    System.out.println("Cita agendada con éxito.");
+                                } catch (ParseException e) {
+                                    System.out.println("Error al procesar la fecha. Por favor, ingrese el formato correcto.");
+                                }
+   
+                                System.out.println("¿Desea agendar otra cita? (si/no):");
+                                String respuesta = agendas.nextLine().toLowerCase();
+                                if (!respuesta.equals("si")) {
+                                    break;
+                                }
+                            }
+   
+                       
+                            System.out.println("Citas agendadas:");
+                            agenda.mostrarCitas();
+   
+                            agenda.guardarCitasEnArchivo("citas.csv");
+                            break;
+   
+                        case 2:
+                            System.out.println("Ingrese la fecha de la cita a eliminar (dd-MM-yyyy HH:mm):");
+                            String fechaEliminarStr = agendas.nextLine();
+   
+                            try {
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                                Date fechaEliminar = dateFormat.parse(fechaEliminarStr);
+   
+                                agenda.getCitas().removeIf(cita -> cita.getFecha().equals(fechaEliminar));
+   
+                                System.out.println("Cita eliminada con éxito.");
+                            } catch (ParseException e) {
+                                System.out.println("Error. Por favor, ingrese el formato correcto.");
+                            }
+                            break;
+   
+                        case 3:
+                            System.out.println("Citas agendadas:");
+                            agenda.mostrarCitas();
+                            break;
+   
+                        case 4:
+                            agenda.guardarCitasEnArchivo("citas.csv");
+                            System.out.println("Saliendo del programa.");
+                            System.exit(0);
+                            break;
+   
+                        default:
+                            System.out.println("Opción no válida. Por favor, seleccione una de las opciones del 1 a la 4.");
+                    }
+                }
+            }
         }
-        // Este bloque de código es responsable de analizar la entrada del usuario como una fecha y agregarla a la lista `Citas`.
-        try {
-            LocalDate fecha = LocalDate.parse(citaingresada);
-            Citas.add(fecha);
-        } catch (Exception e) {
-            panel.mensaje("Ha ingresado la fecha con un formato incorrecto, por favor, inténtelo de nuevo.");
-        }
-    }
 
-    ordenarproximas(Citas);
-
-    // Este código imprime la lista ordenada de fechas ("Citas") y luego itera sobre cada fecha en la lista y la imprime.
-    panel.mensaje("Estas son las citas ordenadas por proximidad:");
-    for (LocalDate cita : Citas) {
-        System.out.println(cita);
-    }
-    panel.mensaje("\nPresione cualquier tecla para regresar");
-    scanner.nextLine();
-}
-
-    //El método 'ordenarproximas' es un método privado que toma como parámetro la lista.
-    /**
-     * @param citas
-     */
-    private static void ordenarproximas(List<LocalDate> citas) {
-    LocalDate proximafecha = LocalDate.now();
-
-    // El código `Collections.sort(citas, (uno, dos) -> {...})` ordena las fechas (`citas`) según su proximidad respecto a la fecha actual (`proximafecha`).
-    Collections.sort(citas, (uno, dos) -> {
-        long diferencia = ChronoUnit.DAYS.between(proximafecha, uno);
-        long diferencias = ChronoUnit.DAYS.between(proximafecha, dos);
-        return Long.compare(Math.abs(diferencia), Math.abs(diferencias));
-    });
-}
-
-/**
- * @param scanner
- * @param listclientes
- */
 public static void calcularDosis(Scanner scanner, ArrayList<Cliente> listclientes) {
     Panel_Control panel = new Panel_Control();
     Medicamentos med = new Medicamentos();
@@ -122,5 +241,4 @@ public static void calcularDosis(Scanner scanner, ArrayList<Cliente> listcliente
     }
 }
 }
-
 
